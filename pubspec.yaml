@@ -2,7 +2,7 @@ name: open_share_plus
 description: Flutter Plugin for sharing contents to social media.You can use it share to Mail, Phone, WhatsApp And System Share UI.
 repository: https://github.com/datadirr/open_share_plus.git
 homepage: https://datadirr.com
-version: 1.1.0
+version: 1.2.0
 
 environment:
   sdk: '>=2.19.6 <3.7.7'
