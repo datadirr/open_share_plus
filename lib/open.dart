@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:open_filex/open_filex.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,12 +20,20 @@ enum OpenMode {
 
 /// [Open] class provide open or share content to social media or system apps
 class Open {
+  static String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
   /// open content to browser
   static Future<bool> browser(
       {String url = "", OpenMode mode = OpenMode.platformDefault}) async {
     try {
       return await launchUrl(Uri.parse(url), mode: _getLaunchMode(mode));
     } catch (e) {
+      log(e.toString());
       return false;
     }
   }
@@ -33,9 +43,10 @@ class Open {
       {String phoneNumber = "",
       OpenMode mode = OpenMode.platformDefault}) async {
     try {
-      return await launchUrl(Uri.parse("tel:$phoneNumber"),
+      return await launchUrl(Uri(scheme: 'tel', path: phoneNumber),
           mode: _getLaunchMode(mode));
     } catch (e) {
+      log(e.toString());
       return false;
     }
   }
@@ -48,9 +59,14 @@ class Open {
       OpenMode mode = OpenMode.platformDefault}) async {
     try {
       return await launchUrl(
-          Uri.parse("mailto:$toAddress?subject=$subject&body=$body"),
+          Uri(
+              scheme: 'mailto',
+              path: toAddress,
+              query: _encodeQueryParameters(
+                  <String, String>{'subject': subject, 'body': body})),
           mode: _getLaunchMode(mode));
     } catch (e) {
+      log(e.toString());
       return false;
     }
   }
@@ -60,22 +76,20 @@ class Open {
       {String? whatsAppNumber,
       String text = "",
       OpenMode mode = OpenMode.externalNonBrowserApplication}) async {
-    if (whatsAppNumber != null && whatsAppNumber.isNotEmpty) {
-      try {
+    try {
+      if (whatsAppNumber != null && whatsAppNumber.isNotEmpty) {
         return await launchUrl(
-            Uri.parse(
-                "https://api.whatsapp.com/send?phone=$whatsAppNumber&text=$text"),
+            Uri.parse("whatsapp://send?phone=$whatsAppNumber&text=$text"),
             mode: _getLaunchMode(mode));
-      } catch (e) {
-        return false;
-      }
-    } else {
-      try {
+      } else {
         return await launchUrl(Uri.parse("whatsapp://send?text=$text"),
             mode: _getLaunchMode(mode));
-      } catch (e) {
-        return false;
       }
+    } catch (e) {
+      return await launchUrl(
+          Uri.parse(
+              "https://api.whatsapp.com/send?phone=$whatsAppNumber&text=$text"),
+          mode: _getLaunchMode(mode));
     }
   }
 

@@ -1,6 +1,7 @@
 ## 1.3.0
 
-* Flutter Plugin for sharing contents to social media.You can use it share to Mail, Phone, WhatsApp And System Share UI.
+* add namespace for android.
+* upgrade dependencies.
 
 ## 1.2.0
 

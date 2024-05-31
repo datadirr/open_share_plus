@@ -25,6 +25,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.datadirr.open_share_plus'
+    }
+
     compileSdkVersion 31
 
     compileOptions {
