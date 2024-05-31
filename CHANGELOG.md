@@ -1,3 +1,7 @@
+## 1.4.0
+
+* upgrade dependencies.
+
 ## 1.3.0
 
 * add namespace for android.
