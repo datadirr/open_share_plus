@@ -20,7 +20,6 @@ class OpenSharePlusPlugin : public flutter::Plugin {
   OpenSharePlusPlugin(const OpenSharePlusPlugin&) = delete;
   OpenSharePlusPlugin& operator=(const OpenSharePlusPlugin&) = delete;
 
- private:
   // Called when a method is called on this plugin's channel from Dart.
   void HandleMethodCall(
       const flutter::MethodCall<flutter::EncodableValue> &method_call,

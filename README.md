@@ -56,7 +56,7 @@ Open.mail(toAddress: "datadirr@gmail.com", subject: "datadirr", body: "datadirr 
 ### WhatsApp (whatsAppNumber with country code)
 
 ```dart
-Open.whatsApp(whatsAppNumber: "919726428397", text: "datadirr")
+Open.whatsApp(whatsAppNumber: "919876543210", text: "datadirr")
 ```
 
 ### Local File (Only ANDROID, IOS)

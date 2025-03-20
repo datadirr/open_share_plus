@@ -22,14 +22,18 @@ enum OpenMode {
 class Open {
   static String? _encodeQueryParameters(Map<String, String> params) {
     return params.entries
-        .map((MapEntry<String, String> e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .map(
+          (MapEntry<String, String> e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+        )
         .join('&');
   }
 
   /// open content to browser
-  static Future<bool> browser(
-      {String url = "", OpenMode mode = OpenMode.platformDefault}) async {
+  static Future<bool> browser({
+    String url = "",
+    OpenMode mode = OpenMode.platformDefault,
+  }) async {
     try {
       return await launchUrl(Uri.parse(url), mode: _getLaunchMode(mode));
     } catch (e) {
@@ -39,12 +43,15 @@ class Open {
   }
 
   /// open phone dial
-  static Future<bool> phone(
-      {String phoneNumber = "",
-      OpenMode mode = OpenMode.platformDefault}) async {
+  static Future<bool> phone({
+    String phoneNumber = "",
+    OpenMode mode = OpenMode.platformDefault,
+  }) async {
     try {
-      return await launchUrl(Uri(scheme: 'tel', path: phoneNumber),
-          mode: _getLaunchMode(mode));
+      return await launchUrl(
+        Uri(scheme: 'tel', path: phoneNumber),
+        mode: _getLaunchMode(mode),
+      );
     } catch (e) {
       log(e.toString());
       return false;
@@ -52,19 +59,24 @@ class Open {
   }
 
   /// share content to mail
-  static Future<bool> mail(
-      {String toAddress = "",
-      String subject = "",
-      String body = "",
-      OpenMode mode = OpenMode.platformDefault}) async {
+  static Future<bool> mail({
+    String toAddress = "",
+    String subject = "",
+    String body = "",
+    OpenMode mode = OpenMode.platformDefault,
+  }) async {
     try {
       return await launchUrl(
-          Uri(
-              scheme: 'mailto',
-              path: toAddress,
-              query: _encodeQueryParameters(
-                  <String, String>{'subject': subject, 'body': body})),
-          mode: _getLaunchMode(mode));
+        Uri(
+          scheme: 'mailto',
+          path: toAddress,
+          query: _encodeQueryParameters(<String, String>{
+            'subject': subject,
+            'body': body,
+          }),
+        ),
+        mode: _getLaunchMode(mode),
+      );
     } catch (e) {
       log(e.toString());
       return false;
@@ -72,24 +84,30 @@ class Open {
   }
 
   /// share content to whatsapp
-  static Future<bool> whatsApp(
-      {String? whatsAppNumber,
-      String text = "",
-      OpenMode mode = OpenMode.externalNonBrowserApplication}) async {
+  static Future<bool> whatsApp({
+    String? whatsAppNumber,
+    String text = "",
+    OpenMode mode = OpenMode.externalNonBrowserApplication,
+  }) async {
     try {
       if (whatsAppNumber != null && whatsAppNumber.isNotEmpty) {
         return await launchUrl(
-            Uri.parse("whatsapp://send?phone=$whatsAppNumber&text=$text"),
-            mode: _getLaunchMode(mode));
+          Uri.parse("whatsapp://send?phone=$whatsAppNumber&text=$text"),
+          mode: _getLaunchMode(mode),
+        );
       } else {
-        return await launchUrl(Uri.parse("whatsapp://send?text=$text"),
-            mode: _getLaunchMode(mode));
+        return await launchUrl(
+          Uri.parse("whatsapp://send?text=$text"),
+          mode: _getLaunchMode(mode),
+        );
       }
     } catch (e) {
       return await launchUrl(
-          Uri.parse(
-              "https://api.whatsapp.com/send?phone=$whatsAppNumber&text=$text"),
-          mode: _getLaunchMode(mode));
+        Uri.parse(
+          "https://api.whatsapp.com/send?phone=$whatsAppNumber&text=$text",
+        ),
+        mode: _getLaunchMode(mode),
+      );
     }
   }
 

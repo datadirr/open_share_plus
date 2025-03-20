@@ -1,26 +1,28 @@
 name: open_share_plus
-description: Flutter Plugin for sharing contents to social media.You can use it share to Mail, Phone, WhatsApp And System Share UI.
+description: "Flutter Plugin for sharing contents to social media.You can use it share to Mail, Phone, WhatsApp And System Share UI."
 repository: https://github.com/datadirr/open_share_plus
 homepage: https://datadirr.com
 version: 1.4.0
 
 environment:
-  sdk: '>=2.19.6 <4.0.0'
-  flutter: ">=2.5.0"
+  sdk: ^3.7.2
+  flutter: '>=3.3.0'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
+  web: ^1.1.1
   plugin_platform_interface: ^2.1.8
-  url_launcher: ^6.2.6
-  open_filex: ^4.4.0
+
+  url_launcher: ^6.3.1
+  open_filex: ^4.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -60,10 +62,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
-  # https://flutter.dev/assets-and-images/#from-packages
+  # https://flutter.dev/to/asset-from-package
   #
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
+  # https://flutter.dev/to/resolution-aware-images
 
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -83,4 +85,4 @@ flutter:
   #         weight: 700
   #
   # For details regarding fonts in packages, see
-  # https://flutter.dev/custom-fonts/#from-packages
+  # https://flutter.dev/to/font-from-package

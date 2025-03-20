@@ -3,19 +3,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:open_share_plus/open_share_plus_method_channel.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   MethodChannelOpenSharePlus platform = MethodChannelOpenSharePlus();
   const MethodChannel channel = MethodChannel('open_share_plus');
 
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-      channel,
-      (MethodCall methodCall) async {
-        return '42';
-      },
-    );
+        .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+          return '42';
+        });
   });
 
   tearDown(() {
